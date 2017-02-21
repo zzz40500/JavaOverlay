@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'javaoverlay'
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "me.ele.javaoverlay"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main {
+            javaOverlays {
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson.class")
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson\$1.class")
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson\$2.class")
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson\$3.class")
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson\$4.class")
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson\$5.class")
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson\$6.class")
+                excludeClass("com.google.code.gson:gson:com/google/gson/Gson\$FutureTypeAdapter.class")
+            }
+
+        }
+
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    productFlavors {
+        dim {
+        }
+    }
+    packagingOptions {
+        exclude 'com/google/gson/Gson.class'
+    }
+}
+
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.8.0'
+}

@@ -1,0 +1,3 @@
+rootProject.name = 'javaoverlay-plugin-build'
+include '::javaoverlay-plugin'
+project(":javaoverlay-plugin").projectDir = new File("../javaoverlay-plugin")
