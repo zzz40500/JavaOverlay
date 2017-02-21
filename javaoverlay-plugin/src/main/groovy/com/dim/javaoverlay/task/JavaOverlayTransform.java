@@ -13,6 +13,7 @@ import com.android.build.gradle.internal.pipeline.TransformManager;
 import com.dim.javaoverlay.common.L;
 import com.dim.javaoverlay.task.process.ClasspathProcessor;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 
 import org.apache.commons.io.FileUtils;
 
@@ -52,7 +53,11 @@ public class JavaOverlayTransform extends Transform {
     }
 
     public Set<QualifiedContent.Scope> getScopes() {
-        return TransformManager.SCOPE_FULL_PROJECT;
+        return Sets.immutableEnumSet(
+                QualifiedContent.Scope.PROJECT_LOCAL_DEPS,
+                QualifiedContent.Scope.SUB_PROJECTS,
+                QualifiedContent.Scope.SUB_PROJECTS_LOCAL_DEPS,
+                QualifiedContent.Scope.EXTERNAL_LIBRARIES);
     }
 
     @Override
