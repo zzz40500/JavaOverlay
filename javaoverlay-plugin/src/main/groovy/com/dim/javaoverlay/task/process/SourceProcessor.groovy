@@ -28,7 +28,7 @@ public class SourceProcessor implements IProcessor {
     private Map<String, String> classMap = new HashMap<>();
     private Map<String, String> sourceMap = new HashMap<>();
 
-    SourceProcessor(final Project project) {
+    public SourceProcessor(final Project project) {
         classMapFile = new File(project.getBuildDir().getAbsolutePath() + "/intermediates/java-overlay/classMap");
         if (!classMapFile.getParentFile().exists()) {
             classMapFile.getParentFile().mkdirs();
@@ -38,7 +38,7 @@ public class SourceProcessor implements IProcessor {
     }
 
     public void getLocalClassMap() {
-        TextFileUtils.visit(new File(file), new TextFileUtils.TextVisitor() {
+        TextFileUtils.visit(classMapFile, new TextFileUtils.TextVisitor() {
             @Override
             void visit(final String line) {
                 String[] info = line.split(":");
