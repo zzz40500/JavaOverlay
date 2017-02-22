@@ -51,5 +51,14 @@ public class JavaOverlayExtension {
         public boolean isMatchClass(final String name) {
             return classNameList.contains(name);
         }
+
+        @Override
+        public String toString() {
+            return "Exclude{" +
+                    "group='" + group + '\'' +
+                    ", jarName='" + jarName + '\'' +
+                    ", classNameList=" + classNameList +
+                    '}';
+        }
     }
 }

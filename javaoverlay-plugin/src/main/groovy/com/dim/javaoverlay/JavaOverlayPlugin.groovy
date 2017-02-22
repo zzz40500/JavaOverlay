@@ -5,7 +5,7 @@ import com.dim.javaoverlay.common.L
 import com.dim.javaoverlay.common.TaskUtils
 import com.dim.javaoverlay.task.JavaOverlayTask
 import com.dim.javaoverlay.task.JavaOverlayTransform
-import com.dim.javaoverlay.task.process.ClasspathProcessor
+
 import com.dim.javaoverlay.task.process.SourceProcessor;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project
@@ -17,7 +17,7 @@ import org.gradle.api.Project
 public class JavaOverlayPlugin implements Plugin<Project> {
 
     @Override
-    public void apply(final Project project) {
+    public void apply(Project project) {
         L.verbose = true;
         Map<String, JavaOverlayExtension> map = new HashMap<>();
         project.android.sourceSets.all { sourceSet ->
@@ -43,12 +43,11 @@ public class JavaOverlayPlugin implements Plugin<Project> {
                 JavaOverlayTask javaOverlayTask = project.tasks.create("javaOverlay${variantName}", JavaOverlayTask);
                 AndroidJavaCompile androidJavaCompile = variant.variantData.javacTask;
                 javaOverlayTask.androidJavaCompile = androidJavaCompile;
-                javaOverlayTask.sourceProcessor = new SourceProcessor();
-                javaOverlayTask.classPathProcessor = new ClasspathProcessor(project, list);
+                javaOverlayTask.sourceProcessor = new SourceProcessor(project);
                 TaskUtils.injectBefore(androidJavaCompile, javaOverlayTask);
                 def transformClassesWithJavaOverlayFor = project.tasks.findByName("transformClassesWithJavaOverlayFor${variant.name.capitalize()}");
                 JavaOverlayTransform javaOverlayTransform = transformClassesWithJavaOverlayFor.transform;
-                javaOverlayTransform.putClassPathProcessor(transformClassesWithJavaOverlayFor.getPath(), javaOverlayTask.classPathProcessor);
+                javaOverlayTransform.ruleMap.put(transformClassesWithJavaOverlayFor.getPath(), list);
             }
         });
 
