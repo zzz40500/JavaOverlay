@@ -17,14 +17,12 @@ import org.gradle.api.tasks.TaskAction
 public class JavaOverlayTask extends DefaultTask {
 
     FileTree source;
-    FileCollection classPath;
     AndroidJavaCompile androidJavaCompile;
     SourceProcessor sourceProcessor;
 
     @TaskAction
     def process() {
         source = androidJavaCompile.getSource();
-        classPath = androidJavaCompile.getClasspath();
         processSource();
     }
 

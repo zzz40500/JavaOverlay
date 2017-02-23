@@ -5,16 +5,9 @@ import com.dim.javaoverlay.common.TextFileUtils
 import okio.BufferedSink
 import org.gradle.api.Project;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import okio.BufferedSource;
 import okio.Okio;
 
 /**
