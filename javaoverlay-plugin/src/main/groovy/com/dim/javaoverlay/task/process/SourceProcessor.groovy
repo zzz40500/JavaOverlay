@@ -26,7 +26,9 @@ public class SourceProcessor implements IProcessor {
         if (!classMapFile.getParentFile().exists()) {
             classMapFile.getParentFile().mkdirs();
         } else {
-            getLocalClassMap();
+            if (classMapFile.exists()) {
+                getLocalClassMap();
+            }
         }
     }
 
